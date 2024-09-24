@@ -5,19 +5,32 @@ const serviceProviderSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    email: {
+        type: String,
+        required: true,
+
+    },
+    password: {
+        type: String,
+        required: true,
+
+    },
+    phone: {
+        type: Number,
+        required: true,
+    },
     experience: {
         type: Number,
         required: true,
     },
-    rating: {
-        type: Number,
-        required: true,
-        min: 0,
-        max: 5
+    servicesOffered: {
+        type: [String],
+
     },
-    work: {
-        type: String,
-        required: true
+    bookings: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Booking'
+
     }
 });
 

@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const userRouter = require('./routers/auth.user.js');
 const paymentRouter = require('./routers/payment.user.js')
 const subscriptionRouter = require('./routers/subscription.user.js')
+const serviceprovider = require('./routers/serviceprovider.user.js')
 const cookieParser = require('cookie-parser');
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use("/", userRouter);
 app.use("/api", paymentRouter);
 app.use("/api", subscriptionRouter);
+app.use("/api/service-provider", serviceprovider);
 
 // Start server
 app.listen(process.env.PORT || 8000, () => {
