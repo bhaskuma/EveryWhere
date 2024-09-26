@@ -48,5 +48,17 @@ const signin = async (req, res) => {
 
 }
 
+//gardner list
 
-module.exports = { signup, signin }
+
+const gardnerList = async (req, res) => {
+    try {
+        const gardner = await serviceprovider.find({ servicesOffered: { $in: ['gardening'] } })
+        console.log(gardner);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+module.exports = { signup, signin, gardnerList }
