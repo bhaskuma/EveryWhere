@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Star, Clock } from "lucide-react";
+import axios from "axios";
 
 const users = [
   {
@@ -36,12 +37,27 @@ const users = [
   },
 ];
 
-export default function ListMali() {
+export default function ServiceList() {
   const [bookedUsers, setBookedUsers] = useState([]);
 
   const handleBooking = (userId) => {
     setBookedUsers((prev) => [...prev, userId]);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/service-provider/gardners"
+        );
+        console.log(response.data, "this is the list");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">

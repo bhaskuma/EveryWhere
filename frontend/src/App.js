@@ -7,7 +7,7 @@ import { Home } from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
 import Mali from './pages/Mali';
 import SubscriptionPlans from './pages/SubscriptionPlans';
-import ListMali from './pages/ListMali';
+import List from './components/ServiceList'
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         </Route>
 
         <Route path='/plan' element={<SubscriptionPlans />} />
-        <Route path='/malilist' element={<ListMali />} />
+        <Route path='/list' element={<List />} />
       </Routes>
     </>
   );
