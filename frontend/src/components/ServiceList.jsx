@@ -2,42 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Star, Clock } from "lucide-react";
 import axios from "axios";
 
-const users = [
-  {
-    id: 1,
-    name: "Alice Johnson",
-    profession: "Web Developer",
-    experience: 5,
-    rating: 4.8,
-    imageUrl: "/placeholder.svg?height=100&width=100",
-  },
-  {
-    id: 2,
-    name: "Bob Smith",
-    profession: "Graphic Designer",
-    experience: 7,
-    rating: 4.6,
-    imageUrl: "/placeholder.svg?height=100&width=100",
-  },
-  {
-    id: 3,
-    name: "Carol Williams",
-    profession: "Data Analyst",
-    experience: 3,
-    rating: 4.2,
-    imageUrl: "/placeholder.svg?height=100&width=100",
-  },
-  {
-    id: 4,
-    name: "David Brown",
-    profession: "UX Designer",
-    experience: 6,
-    rating: 4.9,
-    imageUrl: "/placeholder.svg?height=100&width=100",
-  },
-];
-
 export default function ServiceList() {
+  const [user, setUser] = useState([]);
   const [bookedUsers, setBookedUsers] = useState([]);
 
   const handleBooking = (userId) => {
@@ -50,7 +16,8 @@ export default function ServiceList() {
         const response = await axios.get(
           "http://localhost:8000/api/service-provider/gardners"
         );
-        console.log(response.data, "this is the list");
+        setUser(response.data.gardnerData);
+        console.log(response.data.gardnerData); // Log the data here
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -58,13 +25,12 @@ export default function ServiceList() {
 
     fetchData();
   }, []);
-
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">
         Available Service Providers
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {users.map((user) => (
           <div
             key={user.id}
@@ -104,7 +70,7 @@ export default function ServiceList() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
