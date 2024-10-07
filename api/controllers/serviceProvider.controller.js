@@ -55,7 +55,7 @@ const gardnerList = async (req, res) => {
     try {
         const gardner = await serviceprovider.find({ servicesOffered: { $in: ['gardening'] } })
         console.log(gardner)
-        const gardnerData = gardner.map(({ name, phone }) => ({ name, phone }));
+        const gardnerData = gardner.map(({ name, phone, _id, experience, servicesOffered }) => ({ name, phone, id: _id, experience, profession: servicesOffered }));
 
 
         res.status(201).json({ gardnerData })

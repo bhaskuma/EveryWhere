@@ -24,7 +24,8 @@ const serviceProviderSchema = new mongoose.Schema({
         required: true,
     },
     servicesOffered: {
-        type: [String],
+        type: String,
+        required: true
 
     },
     bookings: {
