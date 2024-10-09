@@ -65,14 +65,14 @@ const gardnerList = async (req, res) => {
 }
 
 
-const clearnerList = async (req, res) => {
+const cookList = async (req, res) => {
     try {
-        const clearner = await serviceprovider.find({ servicesOffered: { $in: ['clearning'] } })
-        console.log(clearner)
-        const clearnerData = clearner.map(({ name, phone }) => ({ name, phone }));
+        const cook = await serviceprovider.find({ servicesOffered: { $in: ['cooking'] } })
+        console.log(cook)
+        const cookData = cook.map(({ name, phone }) => ({ name, phone }));
 
 
-        res.status(201).json({ clearnerData })
+        res.status(201).json({ cookData })
     } catch (error) {
         console.log(error);
     }
@@ -90,4 +90,4 @@ const electricianList = async (req, res) => {
     }
 }
 
-module.exports = { signup, signin, gardnerList, electricianList, clearnerList }
+module.exports = { signup, signin, gardnerList, electricianList, cookList }
