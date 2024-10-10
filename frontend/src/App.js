@@ -10,6 +10,7 @@ import SubscriptionPlans from './pages/SubscriptionPlans';
 import List from './pages/serviceLists/GardnerList'
 import ElectricianList from './pages/serviceLists/ElectricianList';
 import CookList from './pages/serviceLists/CookList';
+import { Booking } from './components/Booking';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path='/gardner-list' element={<List />} />
         <Route path='/cook-list' element={<CookList />} />
         <Route path='/electrician-list' element={<ElectricianList />} />
+        <Route path='/booking' element={<Booking />} />
       </Routes>
     </>
   );

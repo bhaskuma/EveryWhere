@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Clock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
 export default function CookList() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [bookedUsers, setBookedUsers] = useState([]);
 
   const handleBooking = (userId) => {
     setBookedUsers((prev) => [...prev, userId]);
+    navigate("/booking");
   };
 
   useEffect(() => {
