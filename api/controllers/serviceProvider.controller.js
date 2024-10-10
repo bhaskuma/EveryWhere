@@ -69,7 +69,7 @@ const cookList = async (req, res) => {
     try {
         const cook = await serviceprovider.find({ servicesOffered: { $in: ['cooking'] } })
         console.log(cook)
-        const cookData = cook.map(({ name, phone }) => ({ name, phone }));
+        const cookData = cook.map(({ id, name, phone }) => ({ _id: id, name, phone }));
 
 
         res.status(201).json({ cookData })

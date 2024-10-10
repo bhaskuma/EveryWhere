@@ -8,10 +8,10 @@ const serviceProviderSlice = createSlice({
     initialState,
     reducers: {
         setProvider: (state, action) => {
-            state.clearProvider = action.payload;
+            state.currentProvider = action.payload;
         },
         clearProvider: (state) => {
-            state.clearProvider = null;
+            state.currentProvider = null;
         }
     }
 

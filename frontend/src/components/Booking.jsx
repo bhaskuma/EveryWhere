@@ -1,11 +1,12 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 export const Booking = () => {
   const { currentUser } = useSelector((state) => state.user);
-
+  const { currentProvider } = useSelector((state) => state.serviceprovider);
   const [data, setData] = useState({
     userId: currentUser._id,
-    serviceproviderId: "",
+    serviceproviderId: currentProvider._id,
     Date: "",
     Time: "",
     Address: "",
@@ -21,7 +22,10 @@ export const Booking = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
+    const res = axios.post("http://localhost:8000/api/createbooking", data);
+    if (res.status == 201) {
+      console.log("all right");
+    }
   };
 
   return (

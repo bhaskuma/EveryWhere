@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 
-router('/', createBooking);
+router.post('/createbooking', createBooking);
 
 
 module.exports = router

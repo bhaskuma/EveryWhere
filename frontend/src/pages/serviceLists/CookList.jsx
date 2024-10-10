@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import {
+  setProvider,
+  clearProvider,
+} from "../../redux/serviceProvider/serviceProviderSlice";
 import axios from "axios";
 
 export default function CookList() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [bookedUsers, setBookedUsers] = useState([]);
 
-  const handleBooking = (userId) => {
-    setBookedUsers((prev) => [...prev, userId]);
-    navigate("/booking");
+  const handleBooking = (providerId) => {
+    const selectedProvider = users.find((user) => user.phone === providerId);
+    if (selectedProvider) {
+      setBookedUsers((prev) => [...prev, providerId]);
+      dispatch(setProvider(selectedProvider)); // Save only the selected provider's info
+      navigate("/booking");
+    }
   };
 
   useEffect(() => {
