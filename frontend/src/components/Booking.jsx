@@ -1,9 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearProvider } from "../redux/serviceProvider/serviceProviderSlice";
 export const Booking = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { currentProvider } = useSelector((state) => state.serviceprovider);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [data, setData] = useState({
     userId: currentUser._id,
     serviceproviderId: currentProvider._id,
@@ -20,11 +25,23 @@ export const Booking = () => {
       [id]: value,
     }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = axios.post("http://localhost:8000/api/createbooking", data);
+    const res = await axios.post(
+      "http://localhost:8000/api/createbooking",
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+
+    console.log(res);
     if (res.status == 201) {
-      console.log("all right");
+      navigate("/");
+      // dispatch(clearProvider());
     }
   };
 
