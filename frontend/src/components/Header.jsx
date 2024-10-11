@@ -34,7 +34,10 @@ export const Header = () => {
       <div className="flex gap-5 mr-3 justify-center ">
         <button>Home</button>
         {currentUser ? (
-          <button onClick={handleLogout}>Logout</button>
+          <>
+            <button onClick={(e) => navigate("/my-booking")}>Booking</button>
+            <button onClick={handleLogout}>Logout</button>
+          </>
         ) : (
           <>
             <button onClick={(e) => navigate("/login")}>Login</button>

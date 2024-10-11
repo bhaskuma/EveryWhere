@@ -11,6 +11,7 @@ import List from './pages/serviceLists/GardnerList'
 import ElectricianList from './pages/serviceLists/ElectricianList';
 import CookList from './pages/serviceLists/CookList';
 import { Booking } from './components/Booking';
+import MyBooking from './components/MyBooking'
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
         <Route path='/cook-list' element={<CookList />} />
         <Route path='/electrician-list' element={<ElectricianList />} />
         <Route path='/booking' element={<Booking />} />
+        <Route path='/my-booking' element={<MyBooking />} />
+
+
       </Routes>
     </>
   );

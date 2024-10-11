@@ -84,5 +84,25 @@ const createBooking = async (req, res) => {
 };
 
 
+const myBooking = async (req, res) => {
+    const { userId } = req.body;
+    try {
+        const book = await Booking.find({ user_id: userId })
 
-module.exports = { createBooking };
+        if (!book) {
+            return res.status(400).json({ msg: "not found" })
+        }
+        console.log(book);
+        res.status(201).json(book)
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ msg: "Internal server error" });
+
+    }
+
+
+}
+
+
+module.exports = { createBooking, myBooking };
