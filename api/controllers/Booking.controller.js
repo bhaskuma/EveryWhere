@@ -86,6 +86,41 @@ const myBooking = async (req, res) => {
     }
 };
 
+const deleteBooking = async (req, res) => {
+    const { id } = req.body;
+
+    try {
+        const data = await Booking.findByIdAndDelete(id);
+
+        if (!data) {
+            return res.status(404).json({ message: "Booking not found" });
+        }
+
+        res.status(200).json({ message: "Booking successfully deleted", data });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+const acceptBooking = async (req, res) => {
+    const { id } = req.body;
+
+    try {
+        const data = await Booking.findByIdAndUpdate(id, { status: 'accept' }, { new: true });
+
+        if (!data) {
+            return res.status(404).json({ message: "Booking not found" });
+        }
+
+        res.status(200).json({ message: "Booking successfully accepted", data });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
 
 
-module.exports = { createBooking, myBooking };
+
+module.exports = { createBooking, myBooking, deleteBooking, acceptBooking };

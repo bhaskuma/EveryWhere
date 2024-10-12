@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-// import { Footer } from './components/Footer';
 import { Login } from './pages/Login';
 import { SignUp } from './pages/SignUp';
-// import { Header } from './components/Header';
 import { Home } from './pages/Home';
+import LoginProvider from './components/Provider/LoginProvider';
 import PrivateRoute from './components/PrivateRoute';
+import RegisterProvider from './components/Provider/RegisterProvider';
 import Mali from './pages/Mali';
 import SubscriptionPlans from './pages/SubscriptionPlans';
 import List from './pages/serviceLists/GardnerList'
@@ -12,6 +12,8 @@ import ElectricianList from './pages/serviceLists/ElectricianList';
 import CookList from './pages/serviceLists/CookList';
 import { Booking } from './components/Booking';
 import MyBooking from './components/MyBooking'
+import ServiceDashboard from './components/Provider/ServiceDashboard';
+import { Provider } from 'react-redux';
 
 function App() {
   return (
@@ -30,7 +32,9 @@ function App() {
         <Route path='/electrician-list' element={<ElectricianList />} />
         <Route path='/booking' element={<Booking />} />
         <Route path='/my-booking' element={<MyBooking />} />
-
+        <Route path='/login-provider' element={<LoginProvider />} />
+        <Route path='/signup-provider' element={<RegisterProvider />} />
+        <Route path='/provider-dashboard' element={<ServiceDashboard />} />
 
       </Routes>
     </>

@@ -1,6 +1,7 @@
-const { model } = require('mongoose')
+
 const serviceprovider = require('../models/serviceProvider.model.js')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const Booking = require('../models/Booking.model.js')
 
 const signup = async (req, res) => {
 
@@ -9,7 +10,7 @@ const signup = async (req, res) => {
 
         let serviceProvider = await serviceprovider.findOne({ email });
         if (serviceProvider) {
-            return res.status(400).json({ msg: "Service Provider already exists" });
+            return res.status(400).json({ message: "Service Provider already exists" });
         }
         serviceProvider = new serviceprovider({
             name, email, password: bcrypt.hashSync(password, 10), phone, experience, servicesOffered
@@ -20,7 +21,7 @@ const signup = async (req, res) => {
 
     } catch (error) {
         console.log(error.message);
-        res.status(500).send('Server Error');
+        res.status(500).send({ message: 'Server Error' });
 
     }
 
@@ -36,9 +37,9 @@ const signin = async (req, res) => {
         }
         const isMatch = bcrypt.compareSync(password, data.password);
         if (!isMatch) {
-            return res.status(400).json({ msg: "Invalid Credentials" });
+            return res.status(400).json({ message: "Invalid Credentials" });
         }
-        res.status(201).json({ msg: "succesful login" });
+        res.status(201).json({ message: "succesful login", data });
 
     } catch (error) {
         console.log(error);
@@ -90,4 +91,20 @@ const electricianList = async (req, res) => {
     }
 }
 
-module.exports = { signup, signin, gardnerList, electricianList, cookList }
+const serviceproviderBookingList = async (req, res) => {
+    const { serviceId } = req.body;
+    console.log(serviceId)
+    try {
+        const data = await Booking.find({ serviceProvider_id: serviceId });
+
+        if (!data) {
+            return res.status(400).json({})
+        }
+        res.status(201).json({ data });
+    } catch (error) {
+        req.status(500).json("internal error")
+        console.log(error)
+    }
+}
+
+module.exports = { signup, signin, gardnerList, electricianList, cookList, serviceproviderBookingList }
