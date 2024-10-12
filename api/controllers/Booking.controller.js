@@ -2,41 +2,7 @@ const Booking = require('../models/Booking.model')
 const serviceprovider = require('../models/serviceProvider.model.js')
 
 
-// const createBooking = async (req, res) => {
-//     console.log(req.body);
-//     const { userId, serviceproviderId, Date, Time, Address } = req.body;
-//     try {
 
-//         const serviceProvider = await serviceprovider.findById({ serviceproviderId })
-//         if (!serviceProvider) {
-//             return res.staus(404).json({ msg: "serviceprovider is not found" });
-//         }
-
-//         const existingBookings = await Booking.find({
-//             serviceProvider_id: serviceproviderId,
-//             bookingDate: Date,
-//             bookingTime: Time,
-//             user_id: userId,
-//             Address
-//         })
-
-//         if (existingBookings) {
-//             return res.status(400).json({ msg: "serviceProvider already book for this time" })
-//         }
-//         const book = new Booking({
-//             serviceProvider_id: serviceproviderId,
-//             bookingDate: Date,
-//             bookingTime: Time,
-//             user_id: userId,
-//             Address
-//         });
-//         await book.save();
-//         res.status(201).json({ msg: "succesful book" });
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({ msg: "inital error" });
-//     }
-// }
 
 const createBooking = async (req, res) => {
     const { userId, serviceproviderId, Date, Time, Address } = req.body;
@@ -85,23 +51,41 @@ const createBooking = async (req, res) => {
 
 const myBooking = async (req, res) => {
     const { userId } = req.body;
-    try {
-        const book = await Booking.find({ user_id: userId })
+    console.log(req.body);
 
-        if (!book) {
-            return res.status(400).json({ msg: "not found" })
+    try {
+        // Find bookings for the user
+        const bookings = await Booking.find({ user_id: userId });
+
+        // If no bookings are found
+        if (!bookings || bookings.length === 0) {
+            return res.status(400).json({ msg: "No bookings found" });
         }
 
-        res.status(201).json(book)
+        // Array to hold bookings along with service provider information
+        const bookingDetails = [];
+
+        // Loop through each booking to fetch the related service provider information
+        for (const booking of bookings) {
+            const serviceProvider = await serviceprovider.findById(booking.serviceProvider_id);
+            console.log(serviceProvider);
+            // Push the booking along with the service provider name to the result array
+            bookingDetails.push({
+                booking,
+                serviceProviderName: serviceProvider?.name || "Unknown Provider",
+                serviceType: serviceProvider?.servicesOffered || "Unknown Service",
+            });
+        }
+        console.log(bookingDetails)
+        // Send back the combined booking and service provider information
+        res.status(200).json({ bookings: bookingDetails });
 
     } catch (error) {
-        console.log(error)
+        console.error("Error fetching bookings:", error);
         res.status(500).json({ msg: "Internal server error" });
-
     }
+};
 
-
-}
 
 
 module.exports = { createBooking, myBooking };
