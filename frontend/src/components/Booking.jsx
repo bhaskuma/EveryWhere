@@ -2,12 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { clearProvider } from "../redux/serviceProvider/serviceProviderSlice";
 export const Booking = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { currentProvider } = useSelector((state) => state.serviceprovider);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [data, setData] = useState({
     userId: currentUser._id,
@@ -41,7 +38,6 @@ export const Booking = () => {
     console.log(res);
     if (res.status == 201) {
       navigate("/");
-      // dispatch(clearProvider());
     }
   };
 

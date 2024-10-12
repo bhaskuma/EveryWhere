@@ -39,7 +39,6 @@ const serviceprovider = require('../models/serviceProvider.model.js')
 // }
 
 const createBooking = async (req, res) => {
-    console.log(req.body);
     const { userId, serviceproviderId, Date, Time, Address } = req.body;
 
     try {
@@ -92,7 +91,7 @@ const myBooking = async (req, res) => {
         if (!book) {
             return res.status(400).json({ msg: "not found" })
         }
-        console.log(book);
+
         res.status(201).json(book)
 
     } catch (error) {

@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  setProvider,
-  clearProvider,
-} from "../../redux/serviceProvider/serviceProviderSlice";
+import { setProvider } from "../../redux/serviceProvider/serviceProviderSlice";
 import axios from "axios";
 
 export default function CookList() {

@@ -54,8 +54,8 @@ const signin = async (req, res) => {
 const gardnerList = async (req, res) => {
     try {
         const gardner = await serviceprovider.find({ servicesOffered: { $in: ['gardening'] } })
-        console.log(gardner)
-        const gardnerData = gardner.map(({ name, phone, _id, experience, servicesOffered }) => ({ name, phone, id: _id, experience, profession: servicesOffered }));
+
+        const gardnerData = gardner.map(({ name, phone, id, experience, servicesOffered }) => ({ name, phone, _id: id, experience, profession: servicesOffered }));
 
 
         res.status(201).json({ gardnerData })
@@ -68,7 +68,7 @@ const gardnerList = async (req, res) => {
 const cookList = async (req, res) => {
     try {
         const cook = await serviceprovider.find({ servicesOffered: { $in: ['cooking'] } })
-        console.log(cook)
+
         const cookData = cook.map(({ id, name, phone }) => ({ _id: id, name, phone }));
 
 
@@ -82,7 +82,7 @@ const electricianList = async (req, res) => {
     try {
 
         const electrician = await serviceprovider.find({ servicesOffered: { $in: ['electrician'] } });
-        const electricianData = electrician.map(({ name, phone }) => ({ name, phone }))
+        const electricianData = electrician.map(({ name, phone, id }) => ({ name, phone, _id: id }))
         res.status(201).json({ electricianData })
 
     } catch (error) {
