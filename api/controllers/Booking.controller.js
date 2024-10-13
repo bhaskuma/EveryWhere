@@ -87,7 +87,8 @@ const myBooking = async (req, res) => {
 };
 
 const deleteBooking = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.params;
+
 
     try {
         const data = await Booking.findByIdAndDelete(id);
@@ -104,7 +105,7 @@ const deleteBooking = async (req, res) => {
 };
 
 const acceptBooking = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.params;
 
     try {
         const data = await Booking.findByIdAndUpdate(id, { status: 'accept' }, { new: true });
@@ -117,7 +118,7 @@ const acceptBooking = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ message: "Internal server erro" });
     }
 };
 

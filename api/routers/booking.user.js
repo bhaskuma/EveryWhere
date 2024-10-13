@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.post('/createbooking', createBooking);
 router.post('/mybooking', myBooking);
-router.delete('/deletebooking', deleteBooking)
-router.put('/acceptbooking', acceptBooking)
+router.delete('/deletebooking/:id', deleteBooking)
+router.put('/acceptbooking/:id', acceptBooking)
 
 
 module.exports = router;

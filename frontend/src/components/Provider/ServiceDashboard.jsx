@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  signOutStart,
+  signOutSuccess,
+  signOutFailure,
+} from "../../redux/provider/providerSlice";
 const ServiceDashboard = ({}) => {
   const [bookings, setBookings] = useState([]);
   const { currentProvider } = useSelector((state) => state.provider);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -24,7 +33,7 @@ const ServiceDashboard = ({}) => {
 
   const acceptBooking = async (bookingId) => {
     try {
-      await axios.put(`/api/bookings/accept/${bookingId}`);
+      await axios.put(`http://localhost:8000/api/acceptbooking/${bookingId}`);
 
       setBookings((prevBookings) =>
         prevBookings.map((booking) =>
@@ -40,12 +49,25 @@ const ServiceDashboard = ({}) => {
 
   const deleteBooking = async (bookingId) => {
     try {
-      await axios.delete(`/api/bookings/delete/${bookingId}`);
+      console.log(bookingId);
+      await axios.delete(
+        `http://localhost:8000/api/deletebooking/${bookingId}`
+      );
       setBookings((prevBookings) =>
         prevBookings.filter((booking) => booking._id !== bookingId)
       );
     } catch (error) {
       console.error("Error deleting booking", error);
+    }
+  };
+
+  const handleLogout = () => {
+    try {
+      dispatch(signOutStart());
+      dispatch(signOutSuccess());
+      navigate("/login-provider");
+    } catch (error) {
+      dispatch(signOutFailure(error));
     }
   };
 
@@ -62,7 +84,7 @@ const ServiceDashboard = ({}) => {
           </li>
 
           <li className="px-6 py-2 text-gray-700 hover:bg-gray-200">
-            <a href="/settings">Logout</a>
+            <button onClick={handleLogout}>Logout</button>
           </li>
         </ul>
       </nav>
@@ -129,7 +151,7 @@ const ServiceDashboard = ({}) => {
                         </button>
                       </>
                     )}
-                    {booking.status === "Accepted" && (
+                    {booking.status === "accept" && (
                       <span className="text-green-600 font-semibold">
                         Accepted
                       </span>
