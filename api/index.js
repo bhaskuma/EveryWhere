@@ -8,6 +8,7 @@ const subscriptionRouter = require('./routers/subscription.user.js')
 const serviceprovider = require('./routers/serviceprovider.user.js')
 const BookingRouter = require('./routers/booking.user.js')
 const cookieParser = require('cookie-parser');
+const adminProvider = require('./routers/admin.user.js')
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/api", paymentRouter);
 app.use("/api", subscriptionRouter);
 app.use("/api/service-provider", serviceprovider);
 app.use("/api/", BookingRouter);
+app.use("/api", adminProvider)
 
 // Start server
 app.listen(process.env.PORT || 8000, () => {

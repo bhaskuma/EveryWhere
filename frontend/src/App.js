@@ -13,9 +13,8 @@ import CookList from './pages/serviceLists/CookList';
 import { Booking } from './components/Booking';
 import MyBooking from './components/MyBooking'
 import ServiceDashboard from './components/Provider/ServiceDashboard';
-import { Provider } from 'react-redux';
 import ProviderPrivate from './components/Provider/ProviderPrivate';
-
+import { AdminDashboard } from './components/AdminDashboard';
 function App() {
   return (
     <>
@@ -26,7 +25,6 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path='/mali' element={<Mali />} />
         </Route>
-
         <Route path='/plan' element={<SubscriptionPlans />} />
         <Route path='/gardner-list' element={<List />} />
         <Route path='/cook-list' element={<CookList />} />
@@ -39,6 +37,7 @@ function App() {
           <Route path='/provider-dashboard' element={<ServiceDashboard />} />
         </Route>
 
+        <Route path='/admin' element={<AdminDashboard />} />
 
       </Routes>
     </>
