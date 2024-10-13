@@ -14,6 +14,7 @@ import { Booking } from './components/Booking';
 import MyBooking from './components/MyBooking'
 import ServiceDashboard from './components/Provider/ServiceDashboard';
 import { Provider } from 'react-redux';
+import ProviderPrivate from './components/Provider/ProviderPrivate';
 
 function App() {
   return (
@@ -34,7 +35,10 @@ function App() {
         <Route path='/my-booking' element={<MyBooking />} />
         <Route path='/login-provider' element={<LoginProvider />} />
         <Route path='/signup-provider' element={<RegisterProvider />} />
-        <Route path='/provider-dashboard' element={<ServiceDashboard />} />
+        <Route element={<ProviderPrivate />}>
+          <Route path='/provider-dashboard' element={<ServiceDashboard />} />
+        </Route>
+
 
       </Routes>
     </>
