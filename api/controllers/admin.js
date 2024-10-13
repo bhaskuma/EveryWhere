@@ -6,10 +6,9 @@ const serviceprovider = require('../models/serviceProvider.model.js')
 const allBooking = async (req, res) => {
     try {
         const bookings = await Booking.find({});
-        // console.log(bookings);
-        // if (bookings.length === 0) {
-        //     return res.status(404).json({ message: "No bookings found" });
-        // }
+        if (bookings.length === 0) {
+            return res.status(404).json({ message: "No bookings found" });
+        }
         res.status(200).json({ bookings });
     } catch (error) {
         console.log(error);
@@ -32,16 +31,34 @@ const allUsers = async (req, res) => {
 
 const allSubscription = async (req, res) => {
     try {
-        const allSubscriptions = await Subscription.find({});
+        // Use populate to fetch user data along with subscriptions
+        const allSubscriptions = await Subscription.find({})
+            .populate('userId', 'name email') // Assuming 'userId' is the reference field in Subscription schema
+            .exec();
+
         if (allSubscriptions.length === 0) {
             return res.status(404).json({ message: "No subscriptions found" });
         }
-        res.status(200).json({ allSubscriptions });
+
+        // Transform the data to return only necessary fields
+        const subscriptionsWithUsers = allSubscriptions.map((subscription) => ({
+            subscriptionId: subscription._id,
+            status: subscription.status,
+            startDate: subscription.startDate,
+            endDate: subscription.endDate,
+            user: {
+                name: subscription.userId.name || "Unknown",
+                email: subscription.userId.email || "Unknown",
+            },
+        }));
+
+        res.status(200).json({ subscriptionsWithUsers });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Internal server error" });
     }
 };
+
 
 const allProvider = async (req, res) => {
     try {
