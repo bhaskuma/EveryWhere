@@ -34,7 +34,9 @@ export const SignUp = () => {
         },
       });
 
-      console.log(res.data);
+      if (res.status == 201) {
+        navigate("/login");
+      }
     } catch (error) {
       console.error("Error:", error);
     }

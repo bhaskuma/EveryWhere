@@ -16,7 +16,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
-    password: " ",
+    password: "",
   });
   const dispatch = useDispatch();
 

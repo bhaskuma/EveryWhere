@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const SubscriptionPlans = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const plans = [
     { duration: 1, price: 1000 },
@@ -68,9 +70,16 @@ const SubscriptionPlans = () => {
           // Step 5: If the payment is verified, proceed to update the subscription
           if (verificationResponse.data.success) {
             console.log("Payment verified, updating subscription...");
-            await handlePlan(); // Now call handlePlan after payment success and verification
+            await handlePlan(); // Call handlePlan after payment success and verification
+
+            // Redirect to home page or a success page
+            navigate("/"); // Home page
+            // Or navigate("/success") for a specific success page
           } else {
             console.error("Payment verification failed");
+
+            // Redirect to a failed page or stay on the same page with an error message
+            navigate("/plan"); // A custom page for payment failures
           }
         },
         prefill: {

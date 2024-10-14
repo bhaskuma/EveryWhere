@@ -18,7 +18,7 @@ const allBooking = async (req, res) => {
 
 const allUsers = async (req, res) => {
     try {
-        const allusers = await User.find({});
+        const allusers = await User.where("role").equals(0);
         if (allusers.length === 0) {
             return res.status(404).json({ message: "No users found" });
         }
