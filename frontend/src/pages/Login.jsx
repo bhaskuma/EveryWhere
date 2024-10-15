@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   signInStart,
@@ -34,13 +34,18 @@ export const Login = () => {
         },
         withCredentials: true,
       });
+
       if (res.status != 200) {
         return dispatch(signInFailure(res.message));
       }
-      console.log(res, "this is bhaskar");
+
       dispatch(setSubscription(res.data.subscription));
       dispatch(signInSuccess(res.data.user));
-      navigate("/");
+      if (res.data.user.role == 1) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       dispatch(signInFailure(error.message));
       console.error("Error during signin:", error);

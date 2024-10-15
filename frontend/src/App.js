@@ -15,6 +15,7 @@ import MyBooking from './components/MyBooking'
 import ServiceDashboard from './components/Provider/ServiceDashboard';
 import ProviderPrivate from './components/Provider/ProviderPrivate';
 import { AdminDashboard } from './components/AdminDashboard';
+import AdminPrivate from './components/Provider/AdminPrivate';
 function App() {
   return (
     <>
@@ -37,7 +38,10 @@ function App() {
           <Route path='/provider-dashboard' element={<ServiceDashboard />} />
         </Route>
 
-        <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/admin' element={<AdminPrivate>
+          <AdminDashboard />
+
+        </AdminPrivate>} />
 
       </Routes>
     </>
