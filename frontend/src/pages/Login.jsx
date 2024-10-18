@@ -24,6 +24,10 @@ export const Login = () => {
     navigate("/signup");
   };
 
+  const handleProvider = () => {
+    navigate("/signup-provider");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -116,6 +120,20 @@ export const Login = () => {
                 Create an account
               </button>
             </p>
+          </div>
+
+          <div>
+            <div className="mt-4 text-center">
+              <p className="text-sm text-gray-600">
+                Register as Service Provider?{" "}
+                <button
+                  onClick={handleProvider}
+                  className="text-blue-500 hover:underline"
+                >
+                  Create an ServiceProvider account
+                </button>
+              </p>
+            </div>
           </div>
         </div>
       </div>

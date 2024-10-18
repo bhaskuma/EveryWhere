@@ -6,6 +6,10 @@ import electri from "../Assest/electronics1.jpeg";
 import mali from "../Assest/mali.jpeg";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+// import { FontAwesomeIcon } from "react-icons";
 export const Home = () => {
   const navigate = useNavigate();
   const { status } = useSelector((state) => state.subscription);
@@ -13,9 +17,26 @@ export const Home = () => {
     <>
       <Header />
       <main className="p-4">
-        {/* Services Section */}
         <section className="text-center my-8">
-          <h2 className="text-3xl font-bold mb-6">Our Services</h2>
+          <h1 className=" font-bold mr-7 text-3xl font-serif">
+            Login in to access your account
+          </h1>
+          <div className="flex flex-row justify-around  mt-5">
+            <Link to="/login">
+              <div className=" flex flex-row underline items-center">
+                <div className="font-bold mr-7 text-3xl ">User</div>
+                <FaArrowRight />
+              </div>
+            </Link>
+            <Link to="/login-provider">
+              <div className=" flex flex-row underline items-center">
+                <div className="font-bold mr-7 text-3xl ">ServiceProvider</div>
+                <FaArrowRight />
+              </div>
+            </Link>
+          </div>
+          <h2 className="text-3xl font-bold mb-6 mt-5">Our Services</h2>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Service 1 */}
             <div className="bg-white shadow-lg rounded-lg overflow-hidden">
