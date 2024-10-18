@@ -4,6 +4,7 @@ import { Header } from "../components/Header";
 import cook from "../Assest/cook.jpeg";
 import electri from "../Assest/electronics1.jpeg";
 import mali from "../Assest/mali.jpeg";
+import user from "../Assest/11455479.jpg";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa";
@@ -18,19 +19,32 @@ export const Home = () => {
       <Header />
       <main className="p-4">
         <section className="text-center my-8">
-          <h1 className=" font-bold mr-7 text-3xl font-serif">
-            Login in to access your account
-          </h1>
-          <div className="flex flex-row justify-around  mt-5">
+          <div className="flex flex-row justify-center items-center mx-9 h-full">
+            <h1 className=" font-bold mr-7 text-3xl font-serif">
+              Login in to access <br />
+              your account
+            </h1>
+            <img
+              src={user}
+              alt="Book-a-electrician"
+              className="w-60 h-full object-cover"
+            />
+          </div>
+
+          <div className="flex flex-row justify-around  mt-5 h-full">
             <Link to="/login">
               <div className=" flex flex-row underline items-center">
-                <div className="font-bold mr-7 text-3xl ">User</div>
+                <div className="font-bold mr-7 text-3xl p-5 hover:float-start">
+                  User
+                </div>
                 <FaArrowRight />
               </div>
             </Link>
             <Link to="/login-provider">
-              <div className=" flex flex-row underline items-center">
-                <div className="font-bold mr-7 text-3xl ">ServiceProvider</div>
+              <div className=" flex flex-row underline items-center p-5 ">
+                <div className="font-bold mr-7 text-3xl hover:float-start">
+                  ServiceProvider
+                </div>
                 <FaArrowRight />
               </div>
             </Link>

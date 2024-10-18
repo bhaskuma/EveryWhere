@@ -27,7 +27,7 @@ export const Header = () => {
       <div className="flex flex-row p-auto gap-5 items-center">
         <img src={logo} alt="Logo" className="h-10 rounded-sm ml-2" />
         <span className="text-white text-3xl font-bold hover:text-gray-300 transition-colors">
-          AnyWhere
+          EveryWhere
         </span>
       </div>
 
