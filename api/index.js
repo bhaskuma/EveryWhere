@@ -13,13 +13,19 @@ const adminProvider = require('./routers/admin.user.js')
 const app = express();
 
 
-// const allowedOrigin = process.env.CLIENT_ORIGIN || 'http://localhost:3000';
+const allowedOrigins = ['https://everywhere-frontend.onrender.com'];
 
-// app.use(cors({
-//     origin: allowedOrigin,  // Use production frontend URL
-//     credentials: true,      // Allow credentials like cookies, headers
-// }));
-app.use(cors());
+app.use(cors({
+    origin: function (origin, callback) {
+
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, // Allow credentials (cookies, authorization headers)
+}));
 
 
 app.use(express.json());
