@@ -31,9 +31,12 @@ const SubscriptionPlans = () => {
         {
           userId: currentUser._id,
           plan: selectedPlan.duration,
+        },
+        {
+          withCredentials: true, // This ensures cookies/auth headers are sent
         }
       );
-      console.log(res.data);
+
       // Dispatch the subscription data to Redux store
       dispatch(setSubscription(res.data.subscription));
 
