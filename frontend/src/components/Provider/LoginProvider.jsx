@@ -30,7 +30,10 @@ const LoginProvider = () => {
       dispatch(signInStart());
       const res = await axios.post(
         "https://everywhere-ipb6.onrender.com/api/service-provider/signin",
-        formData
+        formData,
+        {
+          withCredentials: true,
+        }
       );
       if (res.status != 201) {
         return dispatch(signInFailure(res.message));
@@ -43,10 +46,15 @@ const LoginProvider = () => {
     }
     const res = await axios.post(
       "https://everywhere-ipb6.onrender.com/api/service-provider/signin",
-      formData
+      formData,
+      {
+        withCredentials: true,
+      }
     );
-    if (res) {
+    if (res.status == 201) {
       navigate("/provider-dashboard");
+    } else {
+      alert("wrong Credentials");
     }
   };
   const handleCreateAccount = () => {
