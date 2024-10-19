@@ -3,6 +3,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const PrivateRoute = () => {
   const { currentProvider } = useSelector((state) => state.provider);
+  console.log(currentProvider, "this is provider");
   return currentProvider ? <Outlet /> : <Navigate to="/login" />;
 };
 
