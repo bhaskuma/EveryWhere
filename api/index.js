@@ -15,18 +15,23 @@ const app = express();
 
 const allowedOrigins = ['https://everywhere-frontend.onrender.com'];
 
-app.use(cors({
-    origin: function (origin, callback) {
+// app.use(cors({
+//     origin: function (origin, callback) {
 
-        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true, // Allow credentials (cookies, authorization headers)
-}));
-
+//         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     credentials: true, // Allow credentials (cookies, authorization headers)
+// }));
+app.use(
+    cors({
+        origin: "http://localhost:3000", // Allow your frontend URL
+        credentials: true, // If you're using cookies/sessions
+    })
+);
 
 app.use(express.json());
 app.use(cookieParser());
