@@ -18,7 +18,7 @@ const ServiceDashboard = ({}) => {
       try {
         const serviceId = currentProvider._id;
         const response = await axios.post(
-          "http://localhost:8000/api/service-provider/providerlist",
+          "https://everywhere-ipb6.onrender.com/api/service-provider/providerlist",
           { serviceId }
         );
         console.log(response.data.data);
@@ -33,7 +33,9 @@ const ServiceDashboard = ({}) => {
 
   const acceptBooking = async (bookingId) => {
     try {
-      await axios.put(`http://localhost:8000/api/acceptbooking/${bookingId}`);
+      await axios.put(
+        `https://everywhere-ipb6.onrender.com/api/acceptbooking/${bookingId}`
+      );
 
       setBookings((prevBookings) =>
         prevBookings.map((booking) =>
@@ -51,7 +53,7 @@ const ServiceDashboard = ({}) => {
     try {
       console.log(bookingId);
       await axios.delete(
-        `http://localhost:8000/api/deletebooking/${bookingId}`
+        `https://everywhere-ipb6.onrender.com/api/deletebooking/${bookingId}`
       );
       setBookings((prevBookings) =>
         prevBookings.filter((booking) => booking._id !== bookingId)

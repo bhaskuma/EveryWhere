@@ -26,10 +26,13 @@ const SubscriptionPlans = () => {
 
   const handlePlan = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/api/plan", {
-        userId: currentUser._id,
-        plan: selectedPlan.duration,
-      });
+      const res = await axios.post(
+        "https://everywhere-ipb6.onrender.com/api/plan",
+        {
+          userId: currentUser._id,
+          plan: selectedPlan.duration,
+        }
+      );
       console.log(res.data);
       // Dispatch the subscription data to Redux store
       dispatch(setSubscription(res.data.subscription));
@@ -45,12 +48,15 @@ const SubscriptionPlans = () => {
     try {
       const {
         data: { key },
-      } = await axios.post("http://localhost:8000/api/getkey");
+      } = await axios.post("https://everywhere-ipb6.onrender.com/api/getkey");
       const {
         data: { order },
-      } = await axios.post("http://localhost:8000/api/checkout", {
-        price: selectedPlan.price,
-      });
+      } = await axios.post(
+        "https://everywhere-ipb6.onrender.com/api/checkout",
+        {
+          price: selectedPlan.price,
+        }
+      );
 
       const options = {
         key,
@@ -62,7 +68,7 @@ const SubscriptionPlans = () => {
         order_id: order.id,
         handler: async function (response) {
           const verificationResponse = await axios.post(
-            "http://localhost:8000/api/paymentverfication",
+            "https://everywhere-ipb6.onrender.com/api/paymentverfication",
             {
               paymentId: response.razorpay_payment_id,
               orderId: response.razorpay_order_id,

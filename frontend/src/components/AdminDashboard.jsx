@@ -21,7 +21,9 @@ export const AdminDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get("http://localhost:8000/api/allusers");
+      const res = await axios.get(
+        "https://everywhere-ipb6.onrender.com/api/allusers"
+      );
       setData(res.data.allusers);
       setDataType("users");
     } catch (error) {
@@ -37,7 +39,9 @@ export const AdminDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get("http://localhost:8000/api/allbookings");
+      const res = await axios.get(
+        "https://everywhere-ipb6.onrender.com/api/allbookings"
+      );
       console.log(res);
       setData(res.data.bookings);
       setDataType("bookings");
@@ -54,7 +58,9 @@ export const AdminDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get("http://localhost:8000/api/allProvider");
+      const res = await axios.get(
+        "https://everywhere-ipb6.onrender.com/api/allProvider"
+      );
       console.log(res.data.allProviders);
       setData(res.data.allProviders);
       setDataType("providers");
@@ -71,8 +77,9 @@ export const AdminDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get("http://localhost:8000/api/allsubscriptions");
-      console.log(res.data.subscriptionsWithUsers.subscription);
+      const res = await axios.get(
+        "https://everywhere-ipb6.onrender.com/api/allsubscriptions"
+      );
       setData(res.data.subscriptionsWithUsers); // Fixed state assignment
       setDataType("subscriptions");
     } catch (error) {

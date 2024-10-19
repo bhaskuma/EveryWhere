@@ -16,7 +16,7 @@ const RegisterProvider = () => {
   const handleForm = async (e) => {
     e.preventDefault();
     const res = await axios.post(
-      "http://localhost:8000/api/service-provider/signup",
+      "https://everywhere-ipb6.onrender.com/api/service-provider/signup",
       formData,
       {
         headers: {

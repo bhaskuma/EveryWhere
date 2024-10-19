@@ -32,12 +32,16 @@ export const Login = () => {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await axios.post("http://localhost:8000/signin/", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        "https://everywhere-ipb6.onrender.com/signin/",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
 
       if (res.status != 200) {
         return dispatch(signInFailure(res.message));

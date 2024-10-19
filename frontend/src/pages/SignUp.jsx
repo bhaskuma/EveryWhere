@@ -28,11 +28,15 @@ export const SignUp = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:8000/signup/", fomData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await axios.post(
+        "https://everywhere-ipb6.onrender.com/signup/",
+        fomData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (res.status == 201) {
         navigate("/login");

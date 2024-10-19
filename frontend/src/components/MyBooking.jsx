@@ -13,7 +13,7 @@ export default function MyBooking() {
         const userId = currentUser._id;
 
         const response = await axios.post(
-          "http://localhost:8000/api/mybooking",
+          "https://everywhere-ipb6.onrender.com/api/mybooking",
           { userId },
           {
             headers: {

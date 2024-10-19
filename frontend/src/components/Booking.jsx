@@ -25,7 +25,7 @@ export const Booking = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.post(
-      "http://localhost:8000/api/createbooking",
+      "https://everywhere-ipb6.onrender.com/api/createbooking",
       data,
       {
         headers: {
