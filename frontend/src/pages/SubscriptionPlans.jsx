@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {
+  setSubscription,
+  clearSubscription,
+} from "../redux/subscription/subscriptionSlice";
+
 const SubscriptionPlans = () => {
+  const dispatch = useDispatch();
   const [selectedPlan, setSelectedPlan] = useState(null);
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
@@ -19,30 +25,33 @@ const SubscriptionPlans = () => {
   };
 
   const handlePlan = async () => {
-    const res = await axios.post("http://localhost:8000/api/plan", {
-      userId: currentUser._id,
-      plan: selectedPlan.duration,
-    });
-    console.log(res);
+    try {
+      const res = await axios.post("http://localhost:8000/api/plan", {
+        userId: currentUser._id,
+        plan: selectedPlan.duration,
+      });
+      console.log(res.data);
+      // Dispatch the subscription data to Redux store
+      dispatch(setSubscription(res.data.subscription));
+
+      // Navigate to the homepage or success page after subscription is set
+      navigate("/");
+    } catch (error) {
+      console.error("Error updating subscription", error);
+    }
   };
 
   const handleSubmit = async (e) => {
     try {
-      // Step 1: Get the Razorpay key
       const {
         data: { key },
       } = await axios.post("http://localhost:8000/api/getkey");
-      console.log(key, "this is key");
-
-      // Step 2: Create an order
       const {
         data: { order },
       } = await axios.post("http://localhost:8000/api/checkout", {
         price: selectedPlan.price,
       });
-      console.log(order, "this is order");
 
-      // Step 3: Define Razorpay options for payment
       const options = {
         key,
         amount: order.amount,
@@ -52,9 +61,6 @@ const SubscriptionPlans = () => {
         image: "https://example.com/your_logo",
         order_id: order.id,
         handler: async function (response) {
-          console.log("Payment successful", response);
-
-          // Step 4: Verify the payment with backend
           const verificationResponse = await axios.post(
             "http://localhost:8000/api/paymentverfication",
             {
@@ -65,21 +71,12 @@ const SubscriptionPlans = () => {
             }
           );
 
-          console.log(verificationResponse.data, "Payment verification result");
-
-          // Step 5: If the payment is verified, proceed to update the subscription
           if (verificationResponse.data.success) {
-            console.log("Payment verified, updating subscription...");
-            await handlePlan(); // Call handlePlan after payment success and verification
-
-            // Redirect to home page or a success page
-            navigate("/"); // Home page
-            // Or navigate("/success") for a specific success page
+            // After successful payment and verification, call handlePlan
+            await handlePlan();
           } else {
             console.error("Payment verification failed");
-
-            // Redirect to a failed page or stay on the same page with an error message
-            navigate("/plan"); // A custom page for payment failures
+            navigate("/plan");
           }
         },
         prefill: {
@@ -95,7 +92,6 @@ const SubscriptionPlans = () => {
         },
       };
 
-      // Step 6: Open Razorpay payment window
       const rzp1 = new window.Razorpay(options);
       rzp1.open();
     } catch (error) {

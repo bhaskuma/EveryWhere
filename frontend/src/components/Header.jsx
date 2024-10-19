@@ -7,7 +7,7 @@ import {
   signOutFailure,
   signOutStart,
 } from "../redux/user/userSlice";
-
+import { clearSubscription } from "../redux/subscription/subscriptionSlice";
 export const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -15,6 +15,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     try {
+      dispatch(clearSubscription());
       dispatch(signOutStart());
       dispatch(signOutSuccess());
     } catch (error) {

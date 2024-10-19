@@ -12,11 +12,14 @@ const adminProvider = require('./routers/admin.user.js')
 
 const app = express();
 
-// Use CORS middleware globally
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-}));
+
+// const allowedOrigin = process.env.CLIENT_ORIGIN || 'http://localhost:3000';
+
+// app.use(cors({
+//     origin: allowedOrigin,  // Use production frontend URL
+//     credentials: true,      // Allow credentials like cookies, headers
+// }));
+
 
 app.use(express.json());
 app.use(cookieParser());
