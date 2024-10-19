@@ -19,6 +19,7 @@ const app = express();
 //     origin: allowedOrigin,  // Use production frontend URL
 //     credentials: true,      // Allow credentials like cookies, headers
 // }));
+app.use(cors());
 
 
 app.use(express.json());
