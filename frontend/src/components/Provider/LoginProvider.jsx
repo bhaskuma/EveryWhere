@@ -36,25 +36,15 @@ const LoginProvider = () => {
         }
       );
       if (res.status != 201) {
-        return dispatch(signInFailure(res.message));
+        alert("wrong credentials");
+        dispatch(signInFailure(res.message));
+        return navigate("/login-provider");
       }
-
       dispatch(signInSuccess(res.data.data));
+      navigate("/provider-dashboard");
     } catch (error) {
       dispatch(signInFailure(error.message));
       console.error("Error during signin:", error);
-    }
-    const res = await axios.post(
-      "https://everywhere-ipb6.onrender.com/api/service-provider/signin",
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
-    if (res.status == 201) {
-      navigate("/provider-dashboard");
-    } else {
-      alert("wrong Credentials");
     }
   };
   const handleCreateAccount = () => {
