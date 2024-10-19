@@ -6,6 +6,7 @@ import {
   setSubscription,
   clearSubscription,
 } from "../redux/subscription/subscriptionSlice";
+import { Header } from "../components/Header";
 
 const SubscriptionPlans = () => {
   const dispatch = useDispatch();

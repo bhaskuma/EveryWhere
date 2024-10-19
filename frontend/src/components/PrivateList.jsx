@@ -5,7 +5,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 const PrivateList = () => {
   const { subscription } = useSelector((state) => state.subscription);
   const { currentUser } = useSelector((state) => state.user);
-  console.log(subscription);
+
   const navigate = useNavigate();
 
   useEffect(() => {

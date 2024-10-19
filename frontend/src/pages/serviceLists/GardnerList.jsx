@@ -26,7 +26,7 @@ export default function ServiceList() {
         const response = await axios.get(
           "https://everywhere-ipb6.onrender.com/api/service-provider/gardners"
         );
-        console.log(response.data);
+
         setUsers(response.data.gardnerData || []);
       } catch (error) {
         console.error("Error fetching data:", error);

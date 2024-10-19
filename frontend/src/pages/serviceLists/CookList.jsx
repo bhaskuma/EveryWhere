@@ -26,7 +26,7 @@ export default function CookList() {
         const response = await axios.get(
           "https://everywhere-ipb6.onrender.com/api/service-provider/cooks"
         );
-        console.log(response.data);
+
         setUsers(response.data.cookData || []);
       } catch (error) {
         console.error("Error fetching data:", error);

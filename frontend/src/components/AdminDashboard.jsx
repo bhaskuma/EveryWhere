@@ -42,7 +42,7 @@ export const AdminDashboard = () => {
       const res = await axios.get(
         "https://everywhere-ipb6.onrender.com/api/allbookings"
       );
-      console.log(res);
+
       setData(res.data.bookings);
       setDataType("bookings");
     } catch (error) {
@@ -61,7 +61,7 @@ export const AdminDashboard = () => {
       const res = await axios.get(
         "https://everywhere-ipb6.onrender.com/api/allProvider"
       );
-      console.log(res.data.allProviders);
+
       setData(res.data.allProviders);
       setDataType("providers");
     } catch (error) {

@@ -26,7 +26,7 @@ export default function CookList() {
         const response = await axios.get(
           "https://everywhere-ipb6.onrender.com/api/service-provider/electricians"
         );
-        console.log(response.data);
+
         setUsers(response.data.electricianData || []);
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -22,7 +22,7 @@ export default function MyBooking() {
             withCredentials: true,
           }
         );
-        console.log(response.data, "this is response");
+
         setBookings(response.data.bookings); // Correct response structure
       } catch (error) {
         console.error("Error fetching bookings:", error);

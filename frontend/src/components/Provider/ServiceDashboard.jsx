@@ -21,7 +21,7 @@ const ServiceDashboard = ({}) => {
           "https://everywhere-ipb6.onrender.com/api/service-provider/providerlist",
           { serviceId }
         );
-        console.log(response.data.data);
+
         setBookings(response.data.data);
       } catch (error) {
         console.error("Error fetching bookings", error);
@@ -51,7 +51,6 @@ const ServiceDashboard = ({}) => {
 
   const deleteBooking = async (bookingId) => {
     try {
-      console.log(bookingId);
       await axios.delete(
         `https://everywhere-ipb6.onrender.com/api/deletebooking/${bookingId}`
       );
@@ -67,7 +66,7 @@ const ServiceDashboard = ({}) => {
     try {
       dispatch(signOutStart());
       dispatch(signOutSuccess());
-      navigate("/login-provider");
+      navigate("/");
     } catch (error) {
       dispatch(signOutFailure(error));
     }

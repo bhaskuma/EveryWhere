@@ -35,7 +35,6 @@ export const Booking = () => {
       }
     );
 
-    console.log(res);
     if (res.status == 201) {
       navigate("/");
     }
