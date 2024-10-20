@@ -10,45 +10,46 @@ import { useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-// import { FontAwesomeIcon } from "react-icons";
 export const Home = () => {
   const navigate = useNavigate();
   const { status } = useSelector((state) => state.subscription);
+
   return (
     <>
       <Header />
       <main className="p-4">
+        {/* Login Section */}
         <section className="text-center my-8">
-          <div className="flex flex-row justify-center items-center mx-9 h-full">
-            <h1 className=" font-bold mr-7 text-3xl font-serif">
-              Login in to access <br />
+          <div className="flex flex-col md:flex-row justify-center items-center mx-9 h-full">
+            <h1 className="font-bold mb-5 md:mb-0 md:mr-7 text-2xl md:text-3xl font-serif">
+              Login to access <br />
               your account
             </h1>
             <img
               src={user}
               alt="Book-a-electrician"
-              className="w-60 h-full object-cover"
+              className="w-40 md:w-60 h-full object-cover"
             />
           </div>
 
-          <div className="flex flex-row justify-around  mt-5 h-full">
-            <Link to="/login">
-              <div className=" flex flex-row underline items-center">
-                <div className="font-bold mr-7 text-3xl p-5 hover:float-start">
-                  User
-                </div>
-                <FaArrowRight />
+          {/* Login Options */}
+          <div className="flex flex-col md:flex-row justify-around mt-5 h-full">
+            <Link to="/login" className="mb-4 md:mb-0">
+              <div className="flex flex-row underline items-center">
+                <div className="font-bold text-2xl md:text-3xl p-5">User</div>
+                <FaArrowRight className="ml-2" />
               </div>
             </Link>
             <Link to="/login-provider">
-              <div className=" flex flex-row underline items-center p-5 ">
-                <div className="font-bold mr-7 text-3xl hover:float-start">
+              <div className="flex flex-row underline items-center p-5">
+                <div className="font-bold text-2xl md:text-3xl">
                   ServiceProvider
                 </div>
-                <FaArrowRight />
+                <FaArrowRight className="ml-2" />
               </div>
             </Link>
           </div>
+
           <h2 className="text-3xl font-bold mb-6 mt-5">Our Services</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -71,7 +72,7 @@ export const Home = () => {
                 <button
                   className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   onClick={() =>
-                    status == "active"
+                    status === "active"
                       ? navigate("/cook-list")
                       : navigate("/plan")
                   }
@@ -101,7 +102,7 @@ export const Home = () => {
                 <button
                   className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   onClick={() =>
-                    status == "active"
+                    status === "active"
                       ? navigate("/electrician-list")
                       : navigate("/plan")
                   }
@@ -129,7 +130,7 @@ export const Home = () => {
                 <button
                   className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   onClick={() =>
-                    status == "active"
+                    status === "active"
                       ? navigate("/gardner-list")
                       : navigate("/plan")
                   }
