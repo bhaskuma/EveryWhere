@@ -95,7 +95,7 @@ export const AdminDashboard = () => {
     try {
       dispatch(signOutStart());
       dispatch(signOutSuccess());
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       dispatch(signOutFailure(error));
     }
