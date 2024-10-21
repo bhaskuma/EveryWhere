@@ -43,7 +43,7 @@ const LoginProvider = () => {
     if (!password) {
       setErrorMessage("Password is required");
       return false;
-    } else if (password.length < 6) {
+    } else if (password.length < 5) {
       setErrorMessage("Password must be at least 6 characters long");
       return false;
     }

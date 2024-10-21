@@ -44,6 +44,7 @@ const SubscriptionPlans = () => {
       // Navigate to the homepage or success page after subscription is set
       navigate("/");
     } catch (error) {
+      navigate("/plan");
       console.error("Error updating subscription", error);
     }
   };
